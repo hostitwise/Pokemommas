@@ -6,4 +6,6 @@
     <string name="parent">Parent</string>
     <string name="intro_question_text">Are you a parent or a child?</string>
     <string name="title_activity_child">Child Interface</string>
+
+    <string name="default_preference_string">NULL</string>
 </resources>
