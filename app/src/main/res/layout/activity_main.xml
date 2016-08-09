@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Are you a parent or a child?"
+        android:text="@string/intro_question_text"
         android:id="@+id/intro_question_text"
         android:layout_alignParentTop="true"
         android:layout_marginTop="64dp"
@@ -23,20 +23,22 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:text="Child"
+        android:text="@string/child"
         android:id="@+id/intro_child_button"
-        android:layout_above="@id/intro_parent_button"
+        android:layout_below="@id/intro_question_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp" />
+        android:layout_marginTop="64dp"
+        android:onClick="launchChildStart"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:text="Parent"
+        android:text="@string/parent"
         android:id="@+id/intro_parent_button"
-        android:layout_marginBottom="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="64dp"
+        android:layout_below="@id/intro_child_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="launchParentStart"/>
 
 
 </RelativeLayout>

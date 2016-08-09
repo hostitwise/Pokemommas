@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Pokemommas</string>
+    <string name="title_activity_parent">ParentActivity</string>
+
+    <string name="child">Child</string>
+    <string name="parent">Parent</string>
+    <string name="intro_question_text">Are you a parent or a child?</string>
 </resources>
