@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "292544913873",
+    "firebase_url": "https://pokemommas-428dd.firebaseio.com",
+    "project_id": "pokemommas-428dd",
+    "storage_bucket": "pokemommas-428dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292544913873:android:bca0d51c912f9f6f",
+        "android_client_info": {
+          "package_name": "com.hostitwise.pokemommas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292544913873-b6k88lo6r31f9irj5ji2tpvfr7s6o5np.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT8SjmEonY8ItmWwNfoMnZ-2glOpUGetM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
