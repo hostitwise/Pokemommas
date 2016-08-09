@@ -2,6 +2,7 @@ package com.hostitwise.pokemommas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.view.View;
  * Once the user logs into either child or parent, it should have a boolean indicating if they are a child or a parent
  * This persists until the user hits logout.
  * Based on this stored boolean, it will either open directly to the child intent, parent intent, or this launch screen.
+ *
+ * We will not need to store login info yet since we will (hopefully) integrate the Google Identity Platform to configure the accounts.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -19,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         setContentView(R.layout.activity_main);
 
     }
 
     private boolean preferenceExists(String preferenceFlag){
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         if(settings.getString(preferenceFlag,null)==null){
             return false;
         }
