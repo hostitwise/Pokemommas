@@ -1,5 +1,6 @@
 package com.hostitwise.pokemommas;
 
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -66,8 +68,11 @@ public class ChildActivity extends AppCompatActivity
             char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
             String coords = String.format("%.3f" + deg + latDir + ", %.3f" + deg + longDir,
                     Math.abs(loc.getLatitude()), Math.abs(loc.getLongitude()));
-            Snackbar.make(view, "Located at " + coords, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            new AlertDialog.Builder(this).setTitle("Location").setMessage(coords).setNeutralButton("OK",
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {}
+            }).show();
             System.out.println("locButton " + coords);
         }
         System.out.println("locButton clicked");
