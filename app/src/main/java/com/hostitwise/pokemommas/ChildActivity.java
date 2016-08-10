@@ -5,12 +5,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -37,9 +37,8 @@ public class ChildActivity extends AppCompatActivity
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+            Log.d("init", "mGoogleApiClient initialized");
         }
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +53,7 @@ public class ChildActivity extends AppCompatActivity
 
     protected void onStart() {
         mGoogleApiClient.connect();
+        Log.d("status", "Google API started");
         super.onStart();
     }
 
@@ -65,7 +65,7 @@ public class ChildActivity extends AppCompatActivity
             char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
             char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
             String coords = String.format("%.3f" + deg + latDir + ", %.3f" + deg + longDir,
-                    loc.getLatitude(), loc.getLongitude());
+                    Math.abs(loc.getLatitude()), Math.abs(loc.getLongitude()));
             Snackbar.make(view, "Located at " + coords, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             System.out.println("locButton " + coords);
@@ -75,6 +75,7 @@ public class ChildActivity extends AppCompatActivity
 
     protected void onStop() {
         mGoogleApiClient.disconnect();
+        Log.d("status", "Google API stopped");
         super.onStop();
     }
 
@@ -83,22 +84,28 @@ public class ChildActivity extends AppCompatActivity
     }
 
     public void onConnectionSuspended(int cause) {
-
+        Log.d("status", "Google API suspended");
     }
 
     public void onConnectionFailed(ConnectionResult result) {
-
+        Log.d("status", "Google API failed");
     }
 
     //Returns location using Google API LocationServices, null if permission denied
     private Location getLastKnownLocation() {
         Location mLastLocation;
-        if (ContextCompat.checkSelfPermission(this, "@string/location_permission_fine")
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION },
+                    42);
+        }
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                    mGoogleApiClient);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            System.out.println("location retrieved");
         } else {
             mLastLocation = null;
+            System.out.println("null location, permission check failed");
         }
         return mLastLocation;
     }
