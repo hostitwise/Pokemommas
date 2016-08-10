@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchChildStart(View view){
-        Intent intent = new Intent(this, ParentActivity.class);
+        Intent intent = new Intent(this, ChildActivity.class);
         startActivity(intent);
     }
     public void launchParentStart(View view){
-        Intent intent = new Intent(this, ChildActivity.class);
+        Intent intent = new Intent(this, ParentActivity.class);
         startActivity(intent);
     }
 }

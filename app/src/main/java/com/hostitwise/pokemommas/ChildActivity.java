@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,7 +26,7 @@ public class ChildActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parent);
+        setContentView(R.layout.activity_child);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,22 +39,7 @@ public class ChildActivity extends AppCompatActivity
                     .build();
         }
 
-        Button locButton = (Button) findViewById(R.id.button_location);
-        locButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Location loc = getLastKnownLocation();
-                if (loc != null) {
-                    char deg = '\u00B0';
-                    char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
-                    char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
-                    String coords = String.format("%.3f" + deg + latDir + ", %.3f" + deg + longDir,
-                            loc.getLatitude(), loc.getLongitude());
-                    Snackbar.make(view, "Located at " + coords, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            }
-        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +55,22 @@ public class ChildActivity extends AppCompatActivity
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
+    }
+
+    public void clickListen(View view){
+        Log.d("clicked", "locButton Clicked");
+        Location loc = getLastKnownLocation();
+        if (loc != null) {
+            char deg = '\u00B0';
+            char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
+            char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
+            String coords = String.format("%.3f" + deg + latDir + ", %.3f" + deg + longDir,
+                    loc.getLatitude(), loc.getLongitude());
+            Snackbar.make(view, "Located at " + coords, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            System.out.println("locButton " + coords);
+        }
+        System.out.println("locButton clicked");
     }
 
     protected void onStop() {
