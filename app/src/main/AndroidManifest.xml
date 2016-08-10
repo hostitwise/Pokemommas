@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hostitwise.pokemommas">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChildActivity"
+            android:name=".ParentActivity"
             android:label="@string/title_activity_child"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -25,7 +27,7 @@
                 android:value="com.hostitwise.pokemommas.MainActivity" />
         </activity>
         <activity
-            android:name=".ParentActivity"
+            android:name=".ChildActivity"
             android:label="@string/title_activity_parent"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

@@ -2,7 +2,6 @@ package com.hostitwise.pokemommas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchChildStart(View view){
-        Intent intent = new Intent(this, ChildActivity.class);
+        Intent intent = new Intent(this, ParentActivity.class);
         startActivity(intent);
     }
     public void launchParentStart(View view){
-        Intent intent = new Intent(this, ParentActivity.class);
+        Intent intent = new Intent(this, ChildActivity.class);
         startActivity(intent);
     }
 }
