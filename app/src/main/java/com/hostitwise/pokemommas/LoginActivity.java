@@ -33,10 +33,9 @@ public class LoginActivity extends AppCompatActivity implements LoginChooser.OnF
     }
 
     public void switchLogins(View view){
-        Fragment fragment = new LoginGeneric();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_location, fragment);
+        transaction.replace(R.id.login_chooser_id, new LoginGeneric()).addToBackStack(null);
         transaction.commit();
     }
 }
