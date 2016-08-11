@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -53,25 +54,18 @@ public class ChildActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        Log.d("status", "Google API started");
-        super.onStart();
-    }
-
     public void clickListen(View view){
         Log.d("clicked", "locButton Clicked");
         Location loc = getLastKnownLocation();
         if (loc != null) {
-            String coords = formatLocation(loc,5);
+            String coords = formatLocation(loc, 5);
             new AlertDialog.Builder(this).setTitle("Location").setMessage(coords).setNeutralButton("OK",
                     new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {}
             }).show();
             System.out.println("locButton " + coords);
-        }
-        else{
+        } else {
             System.out.println("locButton returns null data");
         }
     }
@@ -80,39 +74,18 @@ public class ChildActivity extends AppCompatActivity
         char deg = '\u00B0';
         char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
         char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
-        String coords = String.format("%." + precision + "f" + deg + latDir + ", %." + precision + "f" + deg + longDir,
+        return String.format("%." + precision + "f" + deg + latDir + ", %." + precision + "f" + deg + longDir,
                 Math.abs(loc.getLatitude()), Math.abs(loc.getLongitude()));
-        return coords;
-    }
-
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        Log.d("status", "Google API stopped");
-        super.onStop();
-    }
-
-    public void onConnected(Bundle connectionHint) {
-
-    }
-
-    public void onConnectionSuspended(int cause) {
-        Log.d("status", "Google API suspended");
-    }
-
-    public void onConnectionFailed(ConnectionResult result) {
-        Log.d("status", "Google API failed");
     }
 
     //Returns location using Google API LocationServices, null if permission denied
     private Location getLastKnownLocation() {
         Location mLastLocation;
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION },
                     42);
         }
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             System.out.println("location retrieved");
             //System.out.println(mLastLocation.toString());
@@ -121,5 +94,38 @@ public class ChildActivity extends AppCompatActivity
             System.out.println("null location, permission check failed");
         }
         return mLastLocation;
+    }
+
+    private boolean checkPermission(String permission) {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        Log.d("status", "Google API started");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        Log.d("status", "Google API stopped");
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        Log.d("status", "Google API suspended");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        Log.d("status", "Google API failed");
     }
 }
