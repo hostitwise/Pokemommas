@@ -81,7 +81,7 @@ public class ChildActivity extends AppCompatActivity
     //Returns location using Google API LocationServices, null if permission denied
     private Location getLastKnownLocation() {
         Location mLastLocation;
-        if (checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (!checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION },
                     42);
         }
