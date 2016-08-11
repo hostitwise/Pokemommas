@@ -9,31 +9,15 @@
     android:fitsSystemWindows="true"
     tools:context="com.hostitwise.pokemommas.LoginActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_location">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:padding="10dp"
-            android:text="@string/login_choice"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"/>
-        <android.support.v7.widget.ButtonBarLayout
-            android:layout_width="500dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/btn_google_signin_light_normal"/>
-        </android.support.v7.widget.ButtonBarLayout>
-    </LinearLayout>
+        <fragment android:name="com.hostitwise.pokemommas.LoginChooser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/login_chooser_id"
+            />
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
