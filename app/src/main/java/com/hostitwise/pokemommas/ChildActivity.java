@@ -63,11 +63,7 @@ public class ChildActivity extends AppCompatActivity
         Log.d("clicked", "locButton Clicked");
         Location loc = getLastKnownLocation();
         if (loc != null) {
-            char deg = '\u00B0';
-            char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
-            char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
-            String coords = String.format("%.3f" + deg + latDir + ", %.3f" + deg + longDir,
-                    Math.abs(loc.getLatitude()), Math.abs(loc.getLongitude()));
+            String coords = formatLocation(loc,5);
             new AlertDialog.Builder(this).setTitle("Location").setMessage(coords).setNeutralButton("OK",
                     new DialogInterface.OnClickListener() {
                 @Override
@@ -75,7 +71,18 @@ public class ChildActivity extends AppCompatActivity
             }).show();
             System.out.println("locButton " + coords);
         }
-        System.out.println("locButton clicked");
+        else{
+            System.out.println("locButton returns null data");
+        }
+    }
+
+    private String formatLocation(Location loc, int precision){
+        char deg = '\u00B0';
+        char latDir = (loc.getLatitude() >= 0) ? 'N' : 'S';
+        char longDir = (loc.getLongitude() >= 0) ? 'E' : 'W';
+        String coords = String.format("%." + precision + "f" + deg + latDir + ", %." + precision + "f" + deg + longDir,
+                Math.abs(loc.getLatitude()), Math.abs(loc.getLongitude()));
+        return coords;
     }
 
     protected void onStop() {
@@ -108,6 +115,7 @@ public class ChildActivity extends AppCompatActivity
                 == PackageManager.PERMISSION_GRANTED) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             System.out.println("location retrieved");
+            //System.out.println(mLastLocation.toString());
         } else {
             mLastLocation = null;
             System.out.println("null location, permission check failed");
