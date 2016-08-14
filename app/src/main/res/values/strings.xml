@@ -23,8 +23,6 @@
     <string name="add_item">Add New Item</string>
     <string name="action_logout">Logout</string>
 
-    <string name="location_request">Ping location</string>
-
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -38,5 +36,10 @@
         completions."
     </string>
     <string name="login_choice">Choose one of the following options to log in:</string>
+
+    <!-- Placeholder for location button on parent activity -->
+    <string name="location_button_label">Get a location</string>
+
+    <string name="location_request">Track location</string>
 
 </resources>
