@@ -19,7 +19,11 @@
         <activity android:name=".MainActivity">
 
             <!-- put launcher stuff here -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ChildActivity"
@@ -42,11 +46,7 @@
         <activity android:name=".LoginActivity">
 
             <!-- Launcher Stuff -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data

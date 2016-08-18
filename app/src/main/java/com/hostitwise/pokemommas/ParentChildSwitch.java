@@ -3,7 +3,7 @@ package com.hostitwise.pokemommas;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ParentChildSwitch.OnFragmentInteractionListener} interface
+ * {@link ParentChildSwitch.ParentChildSwitchInteractionListener} interface
  * to handle interaction events.
  * Use the {@link ParentChildSwitch#newInstance} factory method to
  * create an instance of this fragment.
@@ -27,7 +27,7 @@ public class ParentChildSwitch extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private ParentChildSwitchInteractionListener mListener;
 
     public ParentChildSwitch() {
         // Required empty public constructor
@@ -70,15 +70,15 @@ public class ParentChildSwitch extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.parentChildInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof ParentChildSwitchInteractionListener) {
+            mListener = (ParentChildSwitchInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -101,8 +101,8 @@ public class ParentChildSwitch extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface ParentChildSwitchInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void parentChildInteraction(Uri uri);
     }
 }

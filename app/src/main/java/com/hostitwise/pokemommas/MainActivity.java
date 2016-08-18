@@ -41,6 +41,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity implements
         LoginChooser.OnFragmentInteractionListener,
         LoginGeneric.OnFragmentInteractionListener,
+        ParentChildSwitch.ParentChildSwitchInteractionListener,
         GoogleApiClient.OnConnectionFailedListener {
 
     private EditText inputEmail, inputPassword;
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         setContentView(R.layout.activity_main);
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_location_main, new ParentChildSwitch()).addToBackStack(null);
+        transaction.commit();
 
         auth = FirebaseAuth.getInstance();
 
@@ -86,14 +92,11 @@ public class MainActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+    }
 
+    public void googleSignInButton(View view){
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private boolean preferenceExists(String preferenceFlag){
@@ -130,6 +133,11 @@ public class MainActivity extends AppCompatActivity implements
     }
     @Override
     public void onLoginChooserFragmentInteraction(Uri uri){
+
+    }
+
+    @Override
+    public void parentChildInteraction(Uri uri){
 
     }
 
