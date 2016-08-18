@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hostitwise.pokemommas.ParentChildSwitch"
+    android:background="@color/pastelBlue">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/intro_question_text"
+        android:id="@+id/intro_question_text"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="64dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:text="@string/child"
+        android:id="@+id/intro_child_button"
+        android:layout_below="@id/intro_question_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:onClick="gotoLogin"
+        android:background="@drawable/rounded_button_settings"
+        android:layout_marginEnd="64dp"
+        android:textSize="24sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:text="@string/parent"
+        android:id="@+id/intro_parent_button"
+        android:layout_marginTop="64dp"
+        android:layout_below="@id/intro_child_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="gotoLogin"
+        android:background="@drawable/rounded_button_settings"
+        android:layout_marginEnd="64dp"
+        android:textSize="24sp"/>
+
+</RelativeLayout>
